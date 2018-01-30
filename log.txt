@@ -1,0 +1,53 @@
+I am ready!
+[Function: playerList]
+[Function: playerList]
+[Function: playerList]
+[Function: playerList]
+[Function: playerList]
+[Function: playerList]
+[Function: playerList]
+{ [Function: playerList] 'Engagé Guignol': 0 }
+{ [Function: playerList]
+  'Engagé Guignol': 0,
+  zaist_chris: 0,
+  SsImGoY: 0,
+  yannou: 0,
+  adi: 0,
+  abdoelouastek: 0,
+  friloseur: 0,
+  'lefrançaisdu59': 0,
+  isaaclichi: 0,
+  DeathHunter_YT: 0,
+  'afazaz.hamza': 0,
+  'La loutre rageuse': 0,
+  '[LCDS] Xayder': 0,
+  CHICKEN: 0,
+  FLIYX: 0,
+  'Nuno PT': 0,
+  ptK: 0,
+  '♛ Ali Alamdar': 0 }
+{ [Function: playerList]
+  'Engagé Guignol': 0,
+  zaist_chris: 0,
+  SsImGoY: 0,
+  yannou: 0,
+  adi: 0,
+  abdoelouastek: 0,
+  friloseur: 0,
+  'lefrançaisdu59': 0,
+  isaaclichi: 0,
+  DeathHunter_YT: 0,
+  'afazaz.hamza': 0,
+  'La loutre rageuse': 0,
+  '[LCDS] Xayder': 0,
+  CHICKEN: 0,
+  FLIYX: 0,
+  'Nuno PT': 0,
+  ptK: 0,
+  '♛ Ali Alamdar': 0,
+  Matteeh: 0,
+  'Willy..♪': 0,
+  mekistune: 0,
+  Errog_MH: 0,
+  eimton: 0,
+  'dam le zinzolin': 0 }
