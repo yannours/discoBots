@@ -1,6 +1,6 @@
 const cfg = require("./config.json");
 const fs = require("fs");
-const wp = require('webpage');
+const exec = require('child_process').exec;
 
 
 var commands = [];
@@ -43,10 +43,12 @@ function webCrawl(message, args) {
 		message.channel.send("You need to add an url e.g. \""+cfg.prefix+"wc http://example.com\"");
 		return;
 	}
-	var page = wp.create();
-	page.open(arg[0], function (status) {
-		message.channel.send(page.plainText);
-		phantom.exit();
+	var yourscript = exec('phantomjs --ssl-protocol=any timerPhantom.js '+args[0], (error, stdout, stderr) => {
+	    console.log(`${stdout}`);
+	    console.log(`${stderr}`);
+	    if (error !== null) {
+	        console.log(`exec error: ${error}`);
+	    }
 	});
 }
 
