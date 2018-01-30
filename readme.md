@@ -1,3 +1,8 @@
+bot to handle some rust logs and console output etc.
+path to adda bot to a serv: https://discordapp.com/oauth2/authorize?client_id=CLIENTID&scope=bot
+
+Samples of rust server logs output
+
 mekistune[190413/76561198314703157] has entered the game
 
 [event] assets/prefabs/npc/cargo plane/cargo_plane.prefab
@@ -8,13 +13,10 @@ Saving complete
 
 [event] assets/prefabs/npc/patrol helicopter/patrolhelicopter.prefab
 
-test
-mekistune[190413/76561198314703157] has entered the game
-mekistune[190413/76561198314703157] has entered the game
-mekistune[190413/76561198314703157] has entered the game
-mekistune[190413/76561198314703157] has entered the game
-mekistune[190413/76561198314703157] has entered the game
+90.70.148.56:49344/76561198086352550/Engagé Guignol disconnecting: closing
 
-mekistune[190413/76561198314703157] has entered the game
+85.190.71.145:58820/76561198074182743/zaist_chris joined [windows/76561198074182743]
 
-azdazd
+85.190.71.145:56745/76561198074182743/zaist_chris disconnecting: disconnect
+
+[CHAT] Errog_MH[357858/76561198268067354] : Hi
