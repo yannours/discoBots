@@ -14,7 +14,7 @@ commands["help"] = botHelp;
 //------------------------------------------------------------------------------//
 //  add a line for each method
 //------------------------------------------------------------------------------//
-commands["wc"] = webCrawl;
+commands["it"] = InvasionTimer;
 
 module.exports.commands = commands;
 
@@ -33,23 +33,20 @@ function botHelp(message) {
 	text += "'"+cfg.prefix+"pl' -> Whitelisted command to Get the connected player list on the rust server.\n";
 	text += "'"+cfg.prefix+"atwl' -> Admin command, add a user from whitelist.\n";
 	text += "'"+cfg.prefix+"rfwl' -> Admin command, remove a user from whitelist.\n\n";
-	text += "'"+cfg.prefix+"wc' -> Get the content of a webpage.\n";
-	text += "Thanks for watching and cyousoon !\n"
+	text += "'"+cfg.prefix+"it' -> Get the invasion timer.\n";
+	text += "\nThanks for watching and cyousoon !\n"
 	message.channel.send(text);
 }
 
-function webCrawl(message, args) {
-	if (typeof args[0] === 'undefined') {
-		message.channel.send("You need to add an url e.g. \""+cfg.prefix+"wc http://example.com\"");
-		return;
-	}
-	var yourscript = exec('phantomjs --ssl-protocol=any timerPhantom.js '+args[0], (error, stdout, stderr) => {
-	    console.log(`${stdout}`);
-	    console.log(`${stderr}`);
-	    if (error !== null) {
-	        console.log(`exec error: ${error}`);
-	    }
+function execute(command, callback) {
+    exec(command, function(error, stdout, stderr){ callback(stdout); });
+}
+
+function InvasionTimer(message, args) {
+	execute('phantomjs --ssl-protocol=any timerPhantom.js https://wow.gameinfo.io/invasions', function(stdout) {
+		message.channel.send(stdout);
 	});
+	
 }
 
 //------------------------------------------------------------------------------//
