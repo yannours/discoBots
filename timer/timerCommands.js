@@ -14,7 +14,8 @@ commands["help"] = botHelp;
 //------------------------------------------------------------------------------//
 //  add a line for each method
 //------------------------------------------------------------------------------//
-commands["it"] = InvasionTimer;
+commands["it"] = invasionTimer;
+//commands["gl"] = giphyLinks;
 
 module.exports.commands = commands;
 
@@ -31,10 +32,10 @@ function botHelp(message) {
 	text += "'"+cfg.prefix+"prefix' -> Admin command to set the prefix.\n";
 	text += "'"+cfg.prefix+"id' -> Return your discord ID (debug purpose).\n";
 	text += "'"+cfg.prefix+"help' -> The actual command, list the possible commands.\n";
-	text += "'"+cfg.prefix+"pl' -> Whitelisted command to Get the connected player list on the rust server.\n";
 	text += "'"+cfg.prefix+"atwl' -> Admin command, add a user from whitelist.\n";
 	text += "'"+cfg.prefix+"rfwl' -> Admin command, remove a user from whitelist.\n\n";
 	text += "'"+cfg.prefix+"it' -> Get the invasion timer.\n";
+	//text += "'"+cfg.prefix+"gl' -> Test of web crawl.\n";
 	text += "\nThanks for watching and cyousoon !\n"
 	message.channel.send(text);
 }
@@ -45,12 +46,26 @@ function execute(command, callback) {
 }
 
 //execute phantomjs script witch get the timer for invasion
-function InvasionTimer(message, args) {
-	execute('phantomjs --ssl-protocol=any timerPhantom.js https://wow.gameinfo.io/invasions', function(stdout) {
+function invasionTimer(message, args) {
+	execute('phantomjs --ssl-protocol=any invasionPhantom.js https://wow.gameinfo.io/invasions', function(stdout) {
 		message.channel.send(stdout);
 	});
-	
 }
+
+//get a link to a gif from giphy with content args (test for advance crawling)
+//cut from the callable cmds because discord already got it with integrated purpose
+function giphyLinks(message, args) {
+	if (typeof args[0] === 'undefined') {
+		var url = "explore/random/";
+	} else {
+		var url = "search/"+args.join("-");
+	}
+	execute('phantomjs --ssl-protocol=any giphyPhantom.js https://giphy.com/'+url, function(stdout) {
+		//console.log(stdout);
+		message.channel.send(stdout);
+	});
+}
+
 
 //------------------------------------------------------------------------------//
 //  utils - basic commands to manage whitelist & admin
