@@ -1,7 +1,9 @@
-# someRandomBot  
-  
+# DISCOBOTS  
+Rusty  
+Timer  
 ## Description  
-Bot to handle some rust logs and console output etc.  
+Rusty - is a bot to handle some rust logs and console output etc.  
+Timer - is an improved version of rusty less rust console mngt plus webcrawling for wow invasion timer.  
 This bot use nodejs, phantomjs and some node modules.  
   
 ## Reminder  
