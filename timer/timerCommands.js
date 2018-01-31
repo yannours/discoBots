@@ -2,7 +2,7 @@ const cfg = require("./config.json");
 const fs = require("fs");
 const exec = require('child_process').exec;
 
-
+//basic commands tab add bottom you custom cmds
 var commands = [];
 commands["ping"] = ping;
 commands["pong"] = pong;
@@ -22,6 +22,7 @@ module.exports.commands = commands;
 //  methods to add or uodate
 //------------------------------------------------------------------------------//
 
+//return bot usage, add bottom you custom funcs
 function botHelp(message) {
 	var text = "Hey dummies !\n\n";
 	text += "Here is the list of commands I can do:\n\n";
@@ -38,10 +39,12 @@ function botHelp(message) {
 	message.channel.send(text);
 }
 
+//basic exec cmd packaged with CB
 function execute(command, callback) {
     exec(command, function(error, stdout, stderr){ callback(stdout); });
 }
 
+//execute phantomjs script witch get the timer for invasion
 function InvasionTimer(message, args) {
 	execute('phantomjs --ssl-protocol=any timerPhantom.js https://wow.gameinfo.io/invasions', function(stdout) {
 		message.channel.send(stdout);
@@ -50,8 +53,10 @@ function InvasionTimer(message, args) {
 }
 
 //------------------------------------------------------------------------------//
-//  utils
+//  utils - basic commands to manage whitelist & admin
 //------------------------------------------------------------------------------//
+
+//@TODO create functionnality for blacklist, anti-spam and language etc
 
 function ping(message) {
 	message.channel.send("Uoin");
@@ -61,6 +66,7 @@ function pong(message) {
 	message.channel.send("Bière");
 }
 
+//chang the bot cmds prefix
 function prefix(message, args) {
 	if (!areYouOwner(message)) {return;}
 	if (typeof args[0] === 'undefined') {
@@ -73,6 +79,7 @@ function prefix(message, args) {
 	message.channel.send("Command prefix is now "+cfg.prefix);
 }
 
+//return discord id of message owner
 function id(message) {
 	message.channel.send(message.author.id);
 }
