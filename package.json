@@ -1,0 +1,29 @@
+{
+  "name": "discobots",
+  "version": "1.0.0",
+  "description": "Bot to handle some rust logs and console output etc.   This bot use nodejs, phantomjs and some node modules.",
+  "main": "bot.js",
+  "dependencies": {
+    "chokidar": "^2.0.0",
+    "discord.js": "^11.3.0",
+    "fsmonitor": "^0.2.4",
+    "last-line": "^0.0.3",
+    "phantom": "^4.0.12",
+    "phantomjs2": "^2.2.0",
+    "read-last-lines": "^1.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yannours/discoBots.git"
+  },
+  "author": "Gouezou Yann-vaï",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yannours/discoBots/issues"
+  },
+  "homepage": "https://github.com/yannours/discoBots#readme"
+}
