@@ -1,8 +1,14 @@
-bot to handle some rust logs and console output etc.
-path to adda bot to a serv: https://discordapp.com/oauth2/authorize?client_id=CLIENTID&scope=bot
+#someRandomBot
 
-Samples of rust server logs output
-
+##Description
+Bot to handle some rust logs and console output etc.  
+This bot use nodejs, phantomjs and some node modules.
+  
+##Reminder
+path to add a bot to a serv: https://discordapp.com/oauth2/authorize?client_id=CLIENTID&scope=bot  
+  
+*Samples of rust server logs output*
+```
 mekistune[190413/76561198314703157] has entered the game
 
 [event] assets/prefabs/npc/cargo plane/cargo_plane.prefab
@@ -20,3 +26,4 @@ Saving complete
 85.190.71.145:56745/76561198074182743/zaist_chris disconnecting: disconnect
 
 [CHAT] Errog_MH[357858/76561198268067354] : Hi
+```
