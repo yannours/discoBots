@@ -1,10 +1,10 @@
-#someRandomBot
-
-##Description
-Bot to handle some rust logs and console output etc.  
-This bot use nodejs, phantomjs and some node modules.
+# someRandomBot  
   
-##Reminder
+## Description  
+Bot to handle some rust logs and console output etc.  
+This bot use nodejs, phantomjs and some node modules.  
+  
+## Reminder  
 path to add a bot to a serv: https://discordapp.com/oauth2/authorize?client_id=CLIENTID&scope=bot  
   
 *Samples of rust server logs output*
