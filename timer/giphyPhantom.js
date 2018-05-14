@@ -26,7 +26,8 @@ page.open(args[1], function (status) {
   //for (bar in foo[0]) {
   //  console.log(bar);
   //}
-  console.log(foo[0].src);
+  console.log(foo);
+  //console.log(foo[0].src);
   phantom.exit();
 });
 
