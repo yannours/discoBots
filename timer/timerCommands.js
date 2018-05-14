@@ -14,8 +14,8 @@ commands["help"] = botHelp;
 //------------------------------------------------------------------------------//
 //  add a line for each method
 //------------------------------------------------------------------------------//
-commands["it"] = invasionTimer;
-//commands["gl"] = giphyLinks;
+//commands["it"] = invasionTimer;
+commands["gl"] = giphyLinks;
 
 module.exports.commands = commands;
 
