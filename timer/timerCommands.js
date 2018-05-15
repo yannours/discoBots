@@ -1,6 +1,7 @@
 const cfg = require("./config.json");
 const fs = require("fs");
 const exec = require('child_process').exec;
+const get = require('http').get;
 
 //basic commands tab add bottom you custom cmds
 var commands = [];
@@ -10,12 +11,13 @@ commands["prefix"] = prefix;
 commands["id"] = id;
 commands["atwl"] = addToWhiteList;
 commands["rfwl"] = removeFromWhiteList;
-commands["help"] = botHelp;
+commands["ahelp"] = botAdminUsage;
+commands["help"] = botBasicUsage;
 //------------------------------------------------------------------------------//
 //  add a line for each method
 //------------------------------------------------------------------------------//
 //commands["it"] = invasionTimer;
-commands["gl"] = giphyLinks;
+commands["gif"] = giphyLinks;
 
 module.exports.commands = commands;
 
@@ -24,18 +26,30 @@ module.exports.commands = commands;
 //------------------------------------------------------------------------------//
 
 //return bot usage, add bottom you custom funcs
-function botHelp(message) {
+function botAdminUsage(message) {
 	var text = "Hey dummies !\n\n";
 	text += "Here is the list of commands I can do:\n\n";
 	text += "'"+cfg.prefix+"ping' -> Just a test to see if I'm alive.\n";
 	text += "'"+cfg.prefix+"pong' -> Another test to see if I'm alive.\n";
 	text += "'"+cfg.prefix+"prefix' -> Admin command to set the prefix.\n";
 	text += "'"+cfg.prefix+"id' -> Return your discord ID (debug purpose).\n";
-	text += "'"+cfg.prefix+"help' -> The actual command, list the possible commands.\n";
+	text += "'"+cfg.prefix+"ahelp' -> The actual command, list the possible commands.\n";
 	text += "'"+cfg.prefix+"atwl' -> Admin command, add a user from whitelist.\n";
 	text += "'"+cfg.prefix+"rfwl' -> Admin command, remove a user from whitelist.\n\n";
-	text += "'"+cfg.prefix+"it' -> Get the invasion timer.\n";
-	//text += "'"+cfg.prefix+"gl' -> Test of web crawl.\n";
+	//text += "'"+cfg.prefix+"it' -> Get the invasion timer.\n";
+	text += "'"+cfg.prefix+"gif' -> Return a random giphy gif (you can add a tag param e.g: '"+cfg.prefix+"gif macron').\n";
+	text += "\nThanks for watching and cyousoon !\n"
+	message.channel.send(text);
+}
+
+//return bot usage, add bottom you custom funcs
+function botBasicUsage(message) {
+	var text = "Hey dummies !\n\n";
+	text += "Here is the list of commands I can do:\n\n";
+	text += "'"+cfg.prefix+"ping' -> Just a test to see if I'm alive.\n";
+	text += "'"+cfg.prefix+"id' -> Return your discord ID (debug purpose).\n";
+	text += "'"+cfg.prefix+"help' -> The actual command, list the possible commands.\n";
+	text += "'"+cfg.prefix+"gif' -> Return a random giphy gif (you can add a tag param e.g: '"+cfg.prefix+"gif macron').\n";
 	text += "\nThanks for watching and cyousoon !\n"
 	message.channel.send(text);
 }
@@ -55,14 +69,65 @@ function invasionTimer(message, args) {
 //get a link to a gif from giphy with content args (test for advance crawling)
 //cut from the callable cmds because discord already got it with integrated purpose
 function giphyLinks(message, args) {
+	/* V0 - inspirationnal code
 	if (typeof args[0] === 'undefined') {
 		var url = "explore/random/";
 	} else {
 		var url = "search/"+args.join("-");
 	}
+	console.log('https://giphy.com/'+url);
 	execute('phantomjs --ssl-protocol=any giphyPhantom.js https://giphy.com/'+url, function(stdout) {
-		//console.log(stdout);
+		console.log(stdout);
 		message.channel.send(stdout);
+	});
+	*/
+	APIHost = "http://api.giphy.com";
+	APIRandom = "/v1/gifs/random?";
+	APIKey = "api_key="+cfg.giphyAPIKey;
+	APIOptions = "";
+	APIRating = "";
+	GIPHYRatings = ["g", "y", "pg-13"];
+	if (typeof args[0] === 'undefined') {
+	} else {
+		//APIOptions = "&tag="+args[0]+"&rating="+(typeof args[1] === 'undefined'? 'g' :args[1]);
+		APIOptions = "&tag=";
+		args.forEach( function(element, index) {
+			if (GIPHYRatings.indexOf(element) === -1) {
+				APIOptions += (index != 0 ? '+' : '')+element;
+			} else {
+				APIRating = "&rating="+element;
+			}
+		});
+	}
+	url = APIHost+APIRandom+APIKey+APIOptions+APIRating;
+	console.log(url);
+	get(url, (resp) => {
+		let data = '';
+		// A chunk of data has been recieved.
+		resp.on('data', (chunk) => {
+		  data += chunk;
+		});
+		// The whole response has been received. Print out the result.
+		resp.on('end', () => {
+			try {
+				JSON.parse(data);
+				data = JSON.parse(data).data;
+			} catch (e) {
+				data = "";
+			}
+			if (typeof data.bitly_url === 'undefined' || data.bitly_url === "") {
+		  		console.log("No gifs found on "+url);
+		 		message.channel.send("No gifs found for "+APIOptions.substr(1)+" Soz bro ! :cry: ");
+		  		return;
+			} else {
+		  		console.log(data.bitly_url);
+		 		message.channel.send(data.bitly_url);
+		  		return;
+			}
+		});
+	}).on("error", (err) => {
+		message.channel.send("There is an unexpected error, check bot logs to investigate.");
+		console.log("Error: " + err.message);
 	});
 }
 

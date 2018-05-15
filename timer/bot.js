@@ -24,13 +24,17 @@ client.on("ready", () => {
 });
 
 client.on("message", (message) => {
-	if (!message.content.startsWith(cfg.prefix) || message.author.bot) return;
-	const args = message.content.slice(cfg.prefix.length).trim().split(/ +/g);
-	const command = args.shift().toLowerCase();
-	log(message);
-	//if cmd exist in cmds, use it :!
-	if (typeof cmds.commands[command] !== 'undefined') {
-		cmds.commands[command](message, args);
+	if (message.author.bot) return;
+	if (!message.content.startsWith(cfg.prefix) && cfg.botOnly) {
+		message.delete();
+	} else {
+		const args = message.content.slice(cfg.prefix.length).trim().split(/ +/g);
+		const command = args.shift().toLowerCase();
+		log(message);
+		//if cmd exist in cmds, use it :!
+		if (typeof cmds.commands[command] !== 'undefined') {
+			cmds.commands[command](message, args);
+		}
 	}
 });
 

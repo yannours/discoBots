@@ -6,6 +6,7 @@ var page = webPage.create();
 //virtual page created
 page.open(args[1], function (status) {
   if (status != 'success') {
+    console.log(status);
     phantom.exit();
     return (false);
   }
@@ -13,7 +14,7 @@ page.open(args[1], function (status) {
   var foo = page.evaluate(function() {
     var ret = [];
     //class of a gif img -> _3QcZOBs-_0PFoUjz21NMOt
-    var giphyGIFClass = "_3QcZOBs-_0PFoUjz21NMOt";
+    var giphyGIFClass = "_gifImage_1mf53_41";
     var nodes = document.querySelector('img.'+giphyGIFClass);
     ret.push(nodes);
     //for (var i = nodes.length - 1; i >= 0; i--) {
@@ -26,8 +27,7 @@ page.open(args[1], function (status) {
   //for (bar in foo[0]) {
   //  console.log(bar);
   //}
-  console.log(foo);
-  //console.log(foo[0].src);
+  console.log(foo[0].src);
   phantom.exit();
 });
 
