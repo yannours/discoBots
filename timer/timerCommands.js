@@ -112,15 +112,18 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-function gExec(message, url, type) { // url.match("&q=(.[^&]*)")
-	console.log(url);
+function gAnswer(message, url, type, data) {
 	switch (type) {
 		case "search":
 			tag = url.match("&q=(.[^&]*)")[1];
 			gif = data[0].url;
 			break;
 		case "random":
-			tag = url.match("&tag=(.[^&]*)")[1];
+			try {
+				tag = url.match("&tag=(.[^&]*)")[1];
+			} catch (e) {
+				tag = 'N/A';
+			}
 			gif = data.url;
 			break;
 		case "trending":
@@ -132,6 +135,23 @@ function gExec(message, url, type) { // url.match("&q=(.[^&]*)")
 			gif = "N/A";
 			break;
 	}
+	try {
+		JSON.parse(data);
+		data = JSON.parse(data).data;
+		if (type == "random")
+			gif = data.url;
+		else
+			gif = data[0].url;
+		console.log(gif);
+		message.channel.send(gif);
+	} catch (e) {
+		console.log("Error: "+e+"");
+		message.channel.send("No gif found for '"+tag+"' soz bro :cry:");
+	}
+}
+
+function gExec(message, url, type) { // url.match("&q=(.[^&]*)")
+	console.log(url);
 	get(url, (resp) => {
 		let data = '';
 		// A chunk of data has been recieved.
@@ -140,19 +160,7 @@ function gExec(message, url, type) { // url.match("&q=(.[^&]*)")
 		});
 		// The whole response has been received. Print out the result.
 		resp.on('end', () => {
-			try {
-				JSON.parse(data);
-				data = JSON.parse(data).data;
-				if (type == "random")
-					gif = data.url;
-				else
-					gif = data[0].url;
-				console.log(gif);
-				message.channel.send(gif);
-			} catch (e) {
-				console.log("Error: "+e+"");
-				message.channel.send("No gif found for '"+tag+"' soz bro :cry:");
-			}
+			gAnswer(message, url, type, data);
 		});
 	}).on("error", (err) => {
 		message.channel.send("There is an unexpected error, check bot logs to investigate.");
@@ -163,7 +171,7 @@ function gExec(message, url, type) { // url.match("&q=(.[^&]*)")
 function gSearch(message, args) {
 	endPoint = cfg.giphy.url+cfg.giphy.apis.search+"?api_key="+cfg.giphy.key;
 	if (typeof args[0] == 'undefined') {
-		return gRandom();
+		return gRandom(message, args);
 	}
 	q = "";
 	args.forEach( function(element, index) {
