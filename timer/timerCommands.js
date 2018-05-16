@@ -41,6 +41,7 @@ function botAdminUsage(message) {
 	text += "'"+cfg.prefix+"rfwl' -> Admin command, remove a user from whitelist.\n\n";
 	//text += "'"+cfg.prefix+"it' -> Get the invasion timer.\n";
 	text += "'"+cfg.prefix+"gif' -> Return a random giphy gif (you can add a tag param e.g: '"+cfg.prefix+"gif macron').\n";
+	text += "'"+cfg.prefix+"gift' -> Return a trending giphy gif.\n";
 	text += "\nThanks for watching and cyousoon !\n"
 	message.channel.send(text);
 }
@@ -53,6 +54,7 @@ function botBasicUsage(message) {
 	text += "'"+cfg.prefix+"id' -> Return your discord ID (debug purpose).\n";
 	text += "'"+cfg.prefix+"help' -> The actual command, list the possible commands.\n";
 	text += "'"+cfg.prefix+"gif' -> Return a random giphy gif (you can add a tag param e.g: '"+cfg.prefix+"gif macron').\n";
+	text += "'"+cfg.prefix+"gift' -> Return a trending giphy gif.\n";
 	text += "\nThanks for watching and cyousoon !\n"
 	message.channel.send(text);
 }
