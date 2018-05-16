@@ -24,9 +24,8 @@ client.on("ready", () => {
 });
 
 client.on("message", (message) => {
-	if (message.author.bot) return;
-	if (!message.content.startsWith(cfg.prefix) && cfg.botOnly) {
-		message.delete();
+	if (message.author.bot || !message.content.startsWith(cfg.prefix)) {
+		return;
 	} else {
 		const args = message.content.slice(cfg.prefix.length).trim().split(/ +/g);
 		const command = args.shift().toLowerCase();
