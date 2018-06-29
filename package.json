@@ -8,8 +8,6 @@
     "discord.js": "^11.3.0",
     "fsmonitor": "^0.2.4",
     "last-line": "^0.0.3",
-    "phantom": "^4.0.12",
-    "phantomjs2": "^2.2.0",
     "read-last-lines": "^1.3.0"
   },
   "devDependencies": {},
